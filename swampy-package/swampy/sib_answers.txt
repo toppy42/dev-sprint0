@@ -1,6 +1,71 @@
 # Text answers from Week 0
 
-# Name:
+# Name: Ethan Puzarne
+
+
+Why would refactoring be useful?
+
+Several reasons:
+1. During development there is a substantial quantity of trial and error when attempting to fix bugs.  Once the issues has been understood and resolved, all of the other trials/errors are unnecessary and just lead to confusion.
+2. At the end of developing a section of code the programmers insight is more thorough than at the beginning.  A refactor with a global perspective in mind can make for more readable code.
+3. Whether it is the you or someone new looking at the code in the future, they will thank you for refactoring the code to be more understandable.
+
+
+What would the code change be to make the house appear twice as high given the latest version of the refactor example script?
+
+This question is ambiguous regarding whether the house should be twice the size or twice the height.
+Twice the size: def draw_house(turtle, size=20):
+Twice the height (height of the walls:
+  fdlt(turtle, 3*size) 
+  fdrt(turtle, 2*size) 
+  fdrt(turtle, 1*size) 
+  fdlt(turtle, 2*size) 
+  turtle.bk(1*size)    
+  fdlt(turtle, 4*size) 
+  fdlt(turtle, 4*size*2, 45) # double right wall size
+  fdlt(turtle, 5*size)     
+  fdlt(turtle, 5*size, 45) 
+  fdlt(turtle, 4*size*2)     # double left wall size
+  turtle.lt()              
+  fdrt(turtle, 4*size*2)     # retrace left wall
+  fdrt(turtle, 7*size)     
+  fdlt(turtle, 4*size*2)     # retrace right wall
+
+What would the code change look like if we had never made a draw_house method that took size as a parameter (no need to actually write it, just explain what it would entail)?
+We would have to specify the size as a local variable or replace every instance of 'size' with the same number
+
+
+
+Looking at what the methods on the Turtle class take as arguments, what can you infer about the special argument `self` when defined on a method?
+Answer:
+self refers to the object (in this case the turtle) that calls the method eg. <object>.<method>
+
+What other methods exist on the Turtle class that we haven’t used yet?
+Answer:
+Haven't been used: get_x, get_y, get_heading
+Have been used indirectly:step, draw, _draw_line, set_color, set_pen_color
+
+
+Note that to call fdlt() the way it is implemented, we need to write `fdlt(bob, 20)`, for example. What would the function look like if we wanted to also pass in a parameter for the angle?
+Answer:
+def fdlt(turtle, size, angle):
+	turtle.fd(size)
+	turtle.lt(angle)
+
+
+What would we have to do to be able to write `bob.fdlt(length, angle)`? (Hint: go back and take a look at how we define methods on the Turtle class in TurtleWorld.py)
+
+Answer: We would need to define a method in the Turtle class: def fdlt(self, length, angle)
+
+
+Why does theta need to be in units of degrees?
+Answer:
+It doesn't.  It could be radians, but this implementation bases its calculations on the 360 degrees of a circle and using radians would cause incorrect calculations.
+
+What would you have to do in order to accept radians?
+Answer:
+We could either rewrite the function to make calculations based on radians, or we could create a local variable degree and convert the theta in radians (theta / (2*pi) * 360)
+
 
 
 
@@ -12,34 +77,32 @@ Explain what each of the following lines does. Use the terminology you learned f
 	wait_for_user()
 
 Answer:
-
-
-
+Import all definitions from TurtleWorld module
+create new TurtleWorld object and assign it to "world" variable
+create new Turtle object and assign it to "bob" variable
+wait for input from the user
 
 
 
 These questions pertain to the program you wrote in Week0.
 
 -- What are the arguments of polygon()?  What type is each argument?
-Answer:
+Answer: turt <Turtle Object>, length <int>, sides <int>
 
 -- What two turtle functions did you use to draw the sides of the polygon?
-Answer:
+Answer: fd and rt, could have used fd and lt
 
 -- What are the arguments for polyline?  What type is each argument?
-Answer:
-
-
-
-
+Answer: turt <Turtle Object>, length <int>, sides <int>, angle <float>
 
 Suppose you wrote a function, center_circle(), that draws a circle of a given radius around the current location of the turtle and restores the turtle to its starting point.
 
 -- What turtle functions would you use to move the turtle from the center to the edge of the circle and get ready to call the original circle() function?
-Answer:
+Answer: pu(), lt(90), fd(radius), rt(90), pd()
 
 -- Suppose the interface of this function requires the turtle to end up in the same place it started, facing in the same direction it started.
-Answer:
+Answer: end the program execution with: pu(), rt(90), fd(radius), lt(90), pd()
 
 -- What is this type of requirement called?
-Answer:
+Answer: a postcondition
+
